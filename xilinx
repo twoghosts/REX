@@ -1,0 +1,54 @@
+#!/bin/bash
+# brian@aljex.com - run xilinx ISE utils.
+# Usage: xilinx <app>
+# Examples:
+#  xilinx ise
+#  xilinx impact
+
+# Download and install ISE 14.7 or just LAbTools from xilinx web site.
+# Install just the webpack component.
+# TODO: Might only need LabTools to program chips, since LabTools includes IMPACT.
+# MUCH smaller download!
+# Uncheck install usb drivers during install.
+# Install the open source usb driver
+#
+#   apt-get install gitk git-gui libusb-dev build-essential libc6-dev fxload
+#   cd /opt/Xilinx
+#   git clone git://git.zerfleddert.de/usb-driver
+#   cd usb-driver
+#   make
+#
+# change the path to Xilinx below if necessary
+# TODO: figure out the LabTools equivalent path
+#
+#   ./setup_pcusb /opt/Xilinx/14.7/ISE_DS/ISE
+#
+# Change $tempnode to %N in the udev rules
+#
+#   sed -i 's;$tempnode;%N;g' /etc/udev/rules.d/xusbdfwu.rules
+#
+#
+# http://www.george-smart.co.uk/wiki/Xilinx_JTAG_Linux
+# http://dreamrunner.org/blog/2012/09/12/install-xilinx-ise-on-the-ubuntu/
+# http://rmdir.de/~michael/xilinx/
+
+# Where was Xilinx ISE installed?
+XILINX_DIR=/opt/Xilinx
+XILINX_PKG=14.7/ISE_DS
+
+# Save the command line args, and delete them from actual argv()
+# because settings32.sh will think it's an argument being passed to IT.
+CMD="$@"
+set --
+
+# Load the ISE environment
+. ${XILINX_DIR}/${XILINX_PKG}/settings32.sh
+
+# Tell IMPACT to use the open source usb driver,
+# instead of giving an error that the windrvr module isn't loaded.
+# This assumes you followed the directions to git-clone under /opt/Xilinx
+export LD_PRELOAD=${XILINX_DIR}/usb-driver/libusb-driver.so
+export XIL_IMPACT_USE_LIBUSB=1
+
+# Run whatever command
+exec $CMD

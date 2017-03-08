@@ -1,0 +1,51 @@
+(1) Xilinx XCR3064XL-10VQ44 (C or I)
+(1) AM29F800BB-90E (C or I)  other speeds acceptable
+(1) LP2980-3.3
+(1) 1.0 uF 0805 package 
+(1) 10kohm 0805 package
+(1) 0 ohm 0805 package
+
++ a 0.050" spacer
++ a ribbon
+
+---
+
+bkw purchase notes
+
+XCR3064XL-10VQG44I - same except lead free, 10VQ44I w/o G not in stock
+digikey
+
+AM29F800BB - obsolete, but still available a few places.
+https://www.verical.com/s/am29f800bb/
+ * any speed ok
+ * any temp range ok
+ * any pb / pb-free
+ * must be boot block B
+ * must be package E
+ Any of these:
+ AM29F800BB-**E*
+verical
+
+LP2980AIM5-3.3/NOPB - The A is more accurate output
+digikey
+
+1.0 uF 0805 - 16v? since the voltage regulator can go to 16?
+C0805C105J4RACTU
+digikey
+
+10k ohm 0805
+RC0805FR-0710KL
+digikey
+
+0 ohm 0805
+RC0805JR-070RL
+digikey
+
+---
+
+DigiKey cart with everything to build 3 boards, except the flash ram
+http://www.digikey.com/short/3rb2m4
+
+flash ram from Verical
+https://www.verical.com/pd/cypress-semiconductor-parallel-nor-flash-am29f800bb-90ef-1717771
+
